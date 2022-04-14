@@ -4,7 +4,9 @@
   "description": "https://ahawiki.net/w/AhaMark",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test-runInBand": "jest --runInBand",
+    "test-watch": "jest --watch"
   },
   "repository": {
     "type": "git",
