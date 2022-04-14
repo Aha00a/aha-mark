@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Aha00a/aha-mark/issues"
   },
-  "homepage": "https://github.com/Aha00a/aha-mark#readme"
+  "homepage": "https://github.com/Aha00a/aha-mark#readme",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
 }
