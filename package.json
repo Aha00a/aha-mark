@@ -1,0 +1,19 @@
+{
+  "name": "aha-mark",
+  "version": "0.0.0",
+  "description": "https://ahawiki.net/w/AhaMark",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aha00a/aha-mark.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aha00a/aha-mark/issues"
+  },
+  "homepage": "https://github.com/Aha00a/aha-mark#readme"
+}
