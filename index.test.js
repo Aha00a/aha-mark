@@ -80,7 +80,7 @@ describe.each([
     test(`parseInterpreter\n${input}\n${parseInterpreter}`, () => {
         expect(ahaMark.parseInterpreter(input)).toEqual(parseInterpreter);
     });
-    test(`parseInterpreter\n${input}\n${renderHtml}`, () => {
+    test(`renderHtml\n${input}\n${renderHtml}`, () => {
         expect(ahaMark.renderHtml(input)).toEqual(renderHtml);
     });
 });
