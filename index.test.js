@@ -3,69 +3,84 @@ const ahaMark = require('./index');
 describe.each([
     {
         input: undefined,
-        expectParsed: []
+        parseInterpreter: [],
+        renderHtml: '',
     },
     {
         input: null,
-        expectParsed: []
+        parseInterpreter: [],
+        renderHtml: '',
     },
     {
         input: '',
-        expectParsed: []
+        parseInterpreter: [],
+        renderHtml: '',
     },
     {
         input: 'a',
-        expectParsed: [{i: 0, v: 'a',},],
+        parseInterpreter: [{i: 0, v: 'a',},],
+        renderHtml: '',
     },
     {
         input: 'aa',
-        expectParsed: [{i: 0, v: 'aa',},],
+        parseInterpreter: [{i: 0, v: 'aa',},],
+        renderHtml: '',
     },
     {
         input: '[[[]]]',
-        expectParsed: [{i: 0, v: []},],
+        parseInterpreter: [{i: 0, v: []},],
+        renderHtml: '',
     },
     {
         input: '[[[',
-        expectParsed: [{i: 0, v: '[[['},],
+        parseInterpreter: [{i: 0, v: '[[['},],
+        renderHtml: '',
     },
     {
         input: ']]]',
-        expectParsed: [{i: 0, v: ']]]'},],
+        parseInterpreter: [{i: 0, v: ']]]'},],
+        renderHtml: '',
     },
     {
         input: '[[[a]]]',
-        expectParsed: [{i: 0, v: [{i: 3, v: 'a'}]},],
+        parseInterpreter: [{i: 0, v: [{i: 3, v: 'a'}]},],
+        renderHtml: '',
     },
     {
         input: '[[[aa]]]',
-        expectParsed: [{i: 0, v: [{i: 3, v: 'aa'}]},],
+        parseInterpreter: [{i: 0, v: [{i: 3, v: 'aa'}]},],
+        renderHtml: '',
     },
     {
         input: 'a[[[a]]]a',
-        expectParsed: [{i: 0, v: "a"}, {i: 1, v: [{i: 4, v: "a"}],}, {i: 8, v: "a"}],
+        parseInterpreter: [{i: 0, v: "a"}, {i: 1, v: [{i: 4, v: "a"}],}, {i: 8, v: "a"}],
+        renderHtml: '',
     },
     {
         input: 'ab[[[cd]]]ef',
-        expectParsed: [{i: 0, v: "ab"}, {i: 2, v: [{i: 5, v: "cd"}],}, {i: 10, v: "ef"}],
+        parseInterpreter: [{i: 0, v: "ab"}, {i: 2, v: [{i: 5, v: "cd"}],}, {i: 10, v: "ef"}],
+        renderHtml: '',
     },
     {
         input: '[[[]]][[[]]]',
-        expectParsed: [{i: 0, v: []}, {i: 6, v: []}],
+        parseInterpreter: [{i: 0, v: []}, {i: 6, v: []}],
+        renderHtml: '',
     },
     {
         input: '[[[[[[]]]]]]',
-        expectParsed: [{i: 0, v: [{i: 3, v: []}]}],
+        parseInterpreter: [{i: 0, v: [{i: 3, v: []}]}],
+        renderHtml: '',
     },
     {
         input: '[[[[[[]]][[[]]]]]]',
-        expectParsed: [{i: 0, v: [{i: 3, v: []}, {i: 9, v: []}]}],
+        parseInterpreter: [{i: 0, v: [{i: 3, v: []}, {i: 9, v: []}]}],
+        renderHtml: '',
     },
-])('ahaMark', ({input, expectParsed}) => {
-    test(`parseInterpreter\n${input}\n${expectParsed}`, () => {
-        expect(ahaMark.parseInterpreter(input)).toEqual(expectParsed);
+])('ahaMark', ({input, parseInterpreter, renderHtml}) => {
+    test(`parseInterpreter\n${input}\n${parseInterpreter}`, () => {
+        expect(ahaMark.parseInterpreter(input)).toEqual(parseInterpreter);
     });
-    test(`parseInterpreter\n${input}\n${expectParsed}`, () => {
-        expect(ahaMark.renderHtml(input)).toEqual("");
+    test(`parseInterpreter\n${input}\n${renderHtml}`, () => {
+        expect(ahaMark.renderHtml(input)).toEqual(renderHtml);
     });
 });
