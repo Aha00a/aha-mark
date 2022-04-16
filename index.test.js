@@ -1,4 +1,3 @@
-const mapRecursive = require('map-recursive');
 const ahaMark = require('./index');
 
 describe.each([
@@ -65,5 +64,8 @@ describe.each([
 ])('ahaMark', ({input, expectParsed}) => {
     test(`parseInterpreter\n${input}\n${expectParsed}`, () => {
         expect(ahaMark.parseInterpreter(input)).toEqual(expectParsed);
+    });
+    test(`parseInterpreter\n${input}\n${expectParsed}`, () => {
+        expect(ahaMark.renderHtml(input)).toEqual("");
     });
 });

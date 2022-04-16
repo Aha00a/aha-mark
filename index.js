@@ -1,5 +1,19 @@
 
 const ahaMark = {
+    mapInterpreter: {
+        Comment: function (ast) {
+            return "";
+        },
+        Wiki: function () {
+
+        },
+    },
+    renderHtml: s => {
+        return [s]
+            .map(ahaMark.parseInterpreter)
+            .map(ahaMark.todoInterpretAsComment)
+            [0];
+    },
     parseInterpreter: s => {
         if (!s)
             return [];
@@ -35,6 +49,18 @@ const ahaMark = {
                 ...arrayIndexValue.slice(indexClose + 1)
             ];
         }
+    },
+    todoInterpretAsComment: ast => {
+        if(!ast)
+            return "";
+
+        if(!ast.v)
+            return "";
+
+        if(!ast.v.length)
+            return;
+
+        return ahaMark.mapInterpreter.Comment(ast);
     },
 };
 
