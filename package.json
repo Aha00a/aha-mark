@@ -4,7 +4,9 @@
   "description": "https://ahawiki.net/w/AhaMark",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -w"
+    "test": "mocha",
+    "test-watch": "mocha -b -w",
+    "test-coverage": "nyc mocha"
   },
   "repository": {
     "type": "git",

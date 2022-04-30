@@ -1,17 +1,29 @@
 
 const ahaMark = {
     mapInterpreter: {
-        Comment: function (ast) {
-            return "";
+        Comment: {
+            renderHtml: ast => {
+                return "";
+            }
         },
-        Wiki: function () {
-
+        Wiki: {
+            renderHtml: ast => {
+                console.log(JSON.stringify(ast));
+                return `<div class="Wiki">${ast.map((v => {
+                    if(Array.isArray(v.v))
+                        return ahaMark.interpret(v.v);
+                    
+                    return (
+                        `<div data-i="${v.i}">${v.v}</div>`
+                    );
+                })).join('')}</div>`;
+            }
         },
     },
     renderHtml: s => {
         return [s]
             .map(ahaMark.parseInterpreter)
-            .map(ahaMark.todoInterpretAsComment)
+            .map(ahaMark.interpret)
             [0];
     },
     parseInterpreter: s => {
@@ -50,17 +62,36 @@ const ahaMark = {
             ];
         }
     },
-    todoInterpretAsComment: ast => {
+    interpret: ast => {
         if(!ast)
-            return "";
+            return `<div class="ahaMark"></div>`;
 
-        if(!ast.v)
-            return "";
+        if(!ast.length)
+            return `<div class="ahaMark"></div>`;
 
-        if(!ast.v.length)
-            return;
+        const shebang = ahaMark.detectShebang(ast, 'Wiki');
+        const interpreter = ahaMark.mapInterpreter[shebang] ?? ahaMark.mapInterpreter.Comment;
+        return `<div class="ahaMark">${interpreter.renderHtml(ast)}</div>`;
+    },
 
-        return ahaMark.mapInterpreter.Comment(ast);
+    detectShebang: (ast, defaultShebang = 'Wiki') => {
+        if(!ast)
+            return defaultShebang;
+
+        if(!ast.length)
+            return defaultShebang;
+
+        const v = ast[0].v;
+        if(!v)
+            return defaultShebang;
+
+        if(Array.isArray(v))
+            return ahaMark.detectShebang(v);
+
+        if(!v.startsWith('#!'))
+            return defaultShebang;
+
+        return v.substring(2);
     },
 };
 
